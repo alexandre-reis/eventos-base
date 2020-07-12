@@ -52,7 +52,7 @@ export const Form = styled.form`
 		color: #fff;
 		font-size: 16px;
 		background: #187DE4;
-		height: 56px;
+		height: 36px;
 		border: 0;
 		border-radius: 5px;
 		width: 100%;

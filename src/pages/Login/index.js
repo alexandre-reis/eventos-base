@@ -1,21 +1,40 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 
-import { Form, Container, ForgotPassword } from "./styles";
+import { Form, Container } from "./styles";
 
 import Logo from "../../assets/upf50.png";
+
+import api from "../../services/api";
+import { login } from "../../services/auth";
 
 class Login extends Component {
 	state = {
 		username: "",
-		email: "",
 		password: "",
 		error: "",
 	};
 
-	handleSignUp = (e) => {
+	handleSignUp = async (e) => {
 		e.preventDefault();
-		alert("Registro efetuado");
+		const { username, password } = this.state;
+		if (!username || !password) {
+			this.setState({
+				error: "Preencha documento e senha para continuar",
+			});
+		} else {
+			try {
+				const response = await api.get("/sessions");
+				console.log(response);
+				login(response)
+				this.props.history.push("/app");
+			} catch (err) {
+				console.log(err);
+				this.setState({
+					error: "Ocorreu um erro ao registrar ao acessar sua conta.",
+				});
+			}
+		}
 	};
 
 	render() {
@@ -41,11 +60,11 @@ class Login extends Component {
 					/>
 					<button type="submit">Entrar</button>
 					<hr />
-					<Link to="/">Esqueceu sua senha?</Link>
+					<Link to="/forgot">Esqueceu sua senha?</Link>
 				</Form>
 			</Container>
 		);
 	}
 }
 
-export default Login;
+export default withRouter(Login);
