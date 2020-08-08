@@ -1,24 +1,42 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components';
 
 export default createGlobalStyle`
-	* {
-		box-sizing: border-box;
-		padding: 0;
-		margin: 0;
-		outline: 0;
-	}
+  @import url('https://fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:400,700&display=swap');
 
-	body, html, input, button {
-		font: 14px sans-serif;
-		background: #eee;
-		text-rendering: optimizeLegibility !important;
-		-webkit-font-smoothing: antialiased !important;
-		height: 100%;
-		width: 100%;
-	}
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    outline:0 ;
+    padding: 0;
+  }
 
-	button {
-		cursor: pointer;
-	}
+  *:focus {
+    outline: 0;
+  }
 
+  html, body, #root {
+    height: 100%;
+    background-color: #eee;
+  }
+
+  body {
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body, input, button {
+    font: 14px 'Roboto', sans-serif;
+    outline: 0;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  button {
+    cursor: pointer;
+  }
 `;
