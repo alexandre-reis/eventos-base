@@ -12,6 +12,7 @@ function Sidebar() {
   const items = [
     { name: 'app', label: 'Home', Icon: HomeIcon },
     { name: 'eventos', label: 'Eventos', Icon: EventIcon },
+    { name: 'participantes/cadastro', label: 'Participantes Cadastro', Icon: GroupIcon },
     { name: 'participantes', label: 'Participantes', Icon: GroupIcon },
   ]
   return (

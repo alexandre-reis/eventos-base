@@ -5,13 +5,19 @@ import { Button } from "@material-ui/core";
 import { Container, Row, Error } from "./styles";
 import ErrorMessage from "./errorMessage";
 
+import { db } from "../../services/firebase";
+
 function Participantes() {
     const onSubmit = (data) => {
-        console.log(data);
-
         if (!data.idEstrangeiro && !data.documento) {
-            alert("Informe o cpf ou id do estrangeiro");
+            return alert("Informe o cpf ou id do estrangeiro");
         }
+
+        db.collection("participantes")
+            .add(data)
+            .then(function (docRef) {
+                console.log("salvou", docRef);
+            });
     };
     const { register, handleSubmit, errors } = useForm();
 
@@ -29,14 +35,6 @@ function Participantes() {
                     <label>Nome:</label>
                     <input ref={register({ required: true })} name="nome" />
                     <ErrorMessage error={errors.nome} />
-                </Row>
-                <Row>
-                    <label>Sobrenome:</label>
-                    <input
-                        ref={register({ required: true })}
-                        name="sobrenome"
-                    />
-                    <ErrorMessage error={errors.sobrenome} />
                 </Row>
                 <Row>
                     <label>Telefone:</label>
@@ -88,5 +86,4 @@ function Participantes() {
         </Container>
     );
 }
-
 export default Participantes;

@@ -1,11 +1,13 @@
-import React from 'react';
+import React from "react";
 
-import { Container } from './styles';
+import { Container, InnerContainer } from "./styles";
 
 function Content({ children }) {
-    return <Container>
-        {children}
-    </Container>;
+    return (
+        <Container>
+            <InnerContainer>{children}</InnerContainer>
+        </Container>
+    );
 }
 
 export default Content;
