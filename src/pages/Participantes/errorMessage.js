@@ -3,6 +3,7 @@ import { Error } from "./styles";
 
 export default function ErrroMessage({ error }) {
     if (error) {
+        console.log(error)
 
         switch (error.type) {
             case "required":

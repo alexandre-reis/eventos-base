@@ -1,22 +1,28 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { useForm } from "react-hook-form";
-import { Table, TableBody,  TableCell, TableContainer, TableHead, TableRow,  Paper} from "@material-ui/core";
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow,
+    Paper,
+    IconButton,
+} from "@material-ui/core";
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
 
-// import { makeStyles } from '@material-ui/core/styles';
-// import Table from '@material-ui/core/Table';
-// import TableBody from '@material-ui/core/TableBody';
-// import TableCell from '@material-ui/core/TableCell';
-// import TableContainer from '@material-ui/core/TableContainer';
-// import TableHead from '@material-ui/core/TableHead';
-// import TableRow from '@material-ui/core/TableRow';
-// import Paper from '@material-ui/core/Paper';
-
-import { Container } from "./styles";
+import history from '../../../services/history';
 
 import { db } from "../../../services/firebase";
 
 function ParticipantesList() {
     const [participantes, setParticipantes] = useState([]);
+
+    const handleEdit = (idParticipante) => {
+        history.push(`/participantes/${idParticipante}`);
+    }
 
     useEffect(() => {
         const eventosRef = db.collection("participantes");
@@ -24,7 +30,7 @@ function ParticipantesList() {
             eventos.forEach((doc) => {
                 const participante = {
                     ...doc.data(),
-                    uuid: doc.id
+                    uuid: doc.id,
                 };
                 setParticipantes((participantes) => [
                     ...participantes,
@@ -41,8 +47,10 @@ function ParticipantesList() {
                     <TableRow>
                         <TableCell>Código</TableCell>
                         <TableCell>Participante</TableCell>
+                        <TableCell>firebase codigo</TableCell>
                         <TableCell>Email</TableCell>
                         <TableCell>telefone</TableCell>
+                        <TableCell></TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -51,9 +59,19 @@ function ParticipantesList() {
                             <TableCell component="th" scope="row">
                                 {participante.codigo}
                             </TableCell>
+                            <TableCell>{participante.uuid}</TableCell>
                             <TableCell>{participante.nome}</TableCell>
                             <TableCell>{participante.email}</TableCell>
                             <TableCell>{participante.telefone}</TableCell>
+                            <TableCell>
+                                <IconButton aria-label="edit" size="small" onClick={() => handleEdit(participante.uuid)}>
+                                    <EditIcon fontSize="inherit" />
+                                </IconButton>
+
+                                <IconButton aria-label="delete" size="small">
+                                    <DeleteIcon fontSize="inherit" />
+                                </IconButton>
+                            </TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
