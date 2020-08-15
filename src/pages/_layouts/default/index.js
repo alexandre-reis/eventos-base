@@ -6,22 +6,18 @@ import Sidebar from "../../../components/Sidebar";
 import Content from "../../../components/Content";
 import { Wrapper } from "./styles";
 
-
 export default function DefaultLayout({ children }) {
-    return (
-        <>
-            <Header />
-            <Wrapper>
-                <Sidebar />
-                <Content>
-                    {children}
-                </Content>
-                {/* footer */}
-            </Wrapper>
-        </>
-    );
+  return (
+    <>
+      <Header />
+      <Wrapper>
+        <Sidebar />
+        <Content>{children}</Content>
+      </Wrapper>
+    </>
+  );
 }
 
 DefaultLayout.propTypes = {
-    children: PropTypes.element.isRequired,
+  children: PropTypes.element.isRequired,
 };

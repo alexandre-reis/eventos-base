@@ -20,7 +20,7 @@ export default function RouteWrapper({
     }
 
     if (signed && !isPrivate) {
-        return <Redirect to="/participantes" />;
+        return <Redirect to="/app" />;
     }
 
     const Layout = signed ? DefaultLayout : AuthLayout;
